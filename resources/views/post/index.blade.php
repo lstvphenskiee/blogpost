@@ -24,7 +24,7 @@
                                 <div class="mb-3">
                                     <p>{{ $comment->content }}</p>
                                     <small class="text-muted">
-                                        {{ $comment->created_at->format('F j, Y') }}
+                                        {{ $comment->created_at->format('F j, Y \\a\\t h:i A') }}
                                     </small>
                                 </div>
                             @empty
