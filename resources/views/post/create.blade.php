@@ -24,7 +24,7 @@
                 <input type="text" name="tags" id="tags" class="form-control">
             </div> --}}
 
-            <button type="submit" class="btn btn-primary">Publish</button>
+            <button type="submit" class="btn btn-primary">Post</button>
         </form>
     </div>
 @endsection
