@@ -8,6 +8,7 @@
         @foreach($posts as $post)
             <div class="card mb-3">
                 <div class="card-body">
+                    <h4>{{ $post->user->name }}</h4>
                     <small class="text-muted">
                         {{ $post->created_at->format('F j, Y \\a\\t h:i A') }}
                     </small>
@@ -22,6 +23,7 @@
                         <div class="commentsContainer overflow-auto" style="max-height: 200px;">
                             @forelse($post->comments as $comment)
                                 <div class="mb-3">
+                                    <p>{{ $comment->user->name}}</p>
                                     <p>{{ $comment->content }}</p>
                                     <small class="text-muted">
                                         {{ $comment->created_at->format('F j, Y \\a\\t h:i A') }}
@@ -60,7 +62,10 @@
         document.querySelectorAll('.commentForm').forEach((form) => {
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
-                e.currentTarget.disabled = true;
+
+                // Disable button while processing
+                const submitBtn = form.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
 
                 const formData = new FormData(form);
 
@@ -77,18 +82,23 @@
                     if (response.ok) {
                         const data = await response.json();
 
+                        // find comments container for this form
                         const commentsContainer = form.closest('.commentSection').querySelector('.commentsContainer');
                         const noCommentsMsg = commentsContainer.querySelector('.noComments');
                         if (noCommentsMsg) noCommentsMsg.remove();
 
+                        // create comment element with user name + content
                         const commentDiv = document.createElement('div');
                         commentDiv.classList.add('mb-3');
                         commentDiv.innerHTML = `
+                            <p>${data.user.name}</p>
                             <p>${data.content}</p>
-                            <small class="text-muted">${new Date(data.created_at).toLocaleDateString()}</small>
+                            <small class="text-muted">Just now</small>
                         `;
 
-                        commentsContainer.appendChild(commentDiv);
+                        commentsContainer.prepend(commentDiv);
+
+                        // reset form
                         form.reset();
                     } else {
                         alert('Failed to submit comment. Please try again.');
@@ -96,6 +106,9 @@
                 } catch (error) {
                     console.error(error);
                     alert('Something went wrong!');
+                } finally {
+                    // Re-enable button
+                    submitBtn.disabled = false;
                 }
             });
         });

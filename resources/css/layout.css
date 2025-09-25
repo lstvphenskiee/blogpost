@@ -1,0 +1,106 @@
+:root {
+    --bgc: #76ceda;
+    --login-btn: #181C14;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url(../img/camp.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.login-main-container {
+    /* border: solid 1px white; */
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.alert-container {
+    /* border: solid white; */
+    position: absolute;
+    top: 0;
+    margin-top: 10px;
+    font-size: 2rem;
+    color: white;
+    z-index: 5;
+}
+.form-container {
+    /* border: solid 1px white; */
+    background-color: rgba(255, 255, 255, 0.3);;
+    border-radius: 20px;
+    padding: 12px;
+    max-width: 500px;
+    width: 100%;
+}
+.form-container h1 {
+    text-align: center;
+    padding: 12px;
+    font-size: 2.5rem;
+}
+.form-container form {
+    /* border: solid 1px red; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 8px;
+}
+
+form .login-input {
+    /* border: solid; */
+    width: 100%;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+}
+.login-input input {
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    padding: 4px;
+    margin-top: 2px;
+}
+.login-input label {
+    font-size: 1.33rem;
+    color: white;
+}
+.login-input button {
+    height: 40px;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--login-btn);
+    color: white;
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+.login-input button:hover {
+    background-color: #3C3D37;
+}
+
+.form-container .btn-link {
+    /* border: solid white; */
+    display: flex;
+    align-items: centerf;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
+.btn-link a {
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+a:hover {
+    border-bottom: 1px solid;
+    color: #FF8225;
+}

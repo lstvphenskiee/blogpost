@@ -8,9 +8,10 @@ use App\Models\Comment;
 
 class PostController extends Controller
 {
-    public function index() {
+    public function index(Post $post) {
         // $post = Post::all();
-        $posts = Post::with('comments')->latest()->get();
+        // $posts = Post::with('comments')->latest()->get();
+        $posts = Post::with( ['user', 'comments.user'])->latest()->get();
         return view('post.index', compact('posts'));
     }
 
@@ -24,13 +25,16 @@ class PostController extends Controller
             'content' => 'required|string'
         ]);
         
-        Post::create($validated);
+        // Post::create($validated);
+        $post = $req->user()->posts()->create($validated);
 
-        return redirect()->route('post.index');
+        return redirect()->route('post.index', $post);
     }
 
     public function show(Post $post) {
+        $post->load('user', 'comments.user');
         $comment = $post->comments()->latest()->get();
+        // $posts = collect([$post]);
         return view('post.show', compact('post', 'comment'));
     }
 
@@ -41,7 +45,14 @@ class PostController extends Controller
         ]);
 
         // $validated['post_id'] = $post->id;
-        $comment = $post->comments()->create($validated);
+        $comment = $post->comments()->create([
+            'content' => $validated['content'],
+            'user_id' => $req->user()->id,
+        ]);
+
+        // $comment = $post->comments()->create($validated);
+
+        $comment->load('user');
 
         if($req->ajax()) {
             return response()->json($comment);

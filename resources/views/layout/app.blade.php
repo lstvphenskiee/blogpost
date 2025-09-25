@@ -18,12 +18,19 @@
     <div class="row">
       <!-- Sidebar -->
       <div class="col-md-3 bg-light p-3 border-end" style="min-height: 100vh;">
-        <h5 class="mb-3">👤 Username</h5>
+        <h5 class="mb-3">👤 {{ Auth::user()->name }}</h5>
         
         <!-- Button trigger modal -->
         <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#postModal">
           Create Post
         </button>
+        <br><br>
+        <form action="{{ route('logout.page')}}" method="POST">
+          @csrf 
+          <button type="submit" class="btn btn-primary w-100">
+            Logout
+          </button>
+        </form>
       </div>
 
       <!-- Main content placeholder -->
