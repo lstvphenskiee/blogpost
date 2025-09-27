@@ -24,7 +24,7 @@ class AuthController extends Controller
             return redirect()->intended(route('post.index'));
         }
 
-        return back()->withErrors(['email' => "Invalid Credential"]);
+        return back()->with('error', 'Invalid Credentials');
     }
 
     public function registerForm() {

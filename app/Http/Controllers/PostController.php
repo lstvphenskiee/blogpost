@@ -47,7 +47,7 @@ class PostController extends Controller
         // $validated['post_id'] = $post->id;
         $comment = $post->comments()->create([
             'content' => $validated['content'],
-            'user_id' => $req->user()->id,
+            'user_id' => auth()->id(),
         ]);
 
         // $comment = $post->comments()->create($validated);

@@ -6,14 +6,9 @@
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
+    
 </head>
 <body>
-    {{-- <nav class="navbar navbar-expand-lg navbar-light bg-dark mb-4">
-        <div class="container">
-            <a class="navbar-brand" href="{{ route('post.index') }}">Blog</a>
-            <a class="navbar-brand" href="{{ route('post.create') }}">Post</a>
-        </div>
-    </nav> --}}
     <div class="container-fluid">
     <div class="row">
       <!-- Sidebar -->
